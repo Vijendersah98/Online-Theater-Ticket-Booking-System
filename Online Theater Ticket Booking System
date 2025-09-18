@@ -1,0 +1,87 @@
+<!Doctype html>
+<html>
+<head>
+<title> Theater Ticket Booking System </title>
+<style> 
+body { 
+font-family: Ariel, sans-serif;
+margin: 30px;
+}
+h2 {
+text-align: center;
+}
+.section{
+margin-bottom: 15px;
+}
+label {
+margin-right: 10px;
+}
+input[ type = "number"] {
+width: 60px;
+}
+.output {
+margin-top: 15px;
+}
+</style>
+</head>
+<body>
+<div class = "container">
+<h2> Theater Booking System </h2>
+<form method = "post">
+<div class = "section">
+ <strong> Seat Type: </strong> 
+<br>
+<label><input type="radio" name="seat" value="625" required >
+Stalls (Rs. 625)</label>    
+<br>
+<label><input type="radio" name="seat" value="750" >
+Circle (Rs. 750)</label>    
+<br>
+<label><input type="radio" name="seat" value="850" >
+Upper Class (Rs. 850)</label>    
+<br>
+<label><input type="radio" name="seat" value="1000" >
+Box (Rs. 1000)</label>    
+<br>
+</div>
+<div class ="section">
+<strong>Payment Mode: </strong>
+<br>
+<label> <input type="radio" name="Payment" value="cash"
+required> Cash</label>
+<br>
+<label> <input type="radio" name="Payment" value="card">
+Credit Card</label>
+<br>
+</div>
+<button type ="submit" name="calculate">Calculate></button>
+<button type = "reset">Clear</button>
+</form>
+<?php
+if(isset($_POST['calculate'])) {
+$seatPrice = $_POST['seat'];
+$paymentMode = $_POST['Payment'];
+$totalSeats = $_POST['seats'];
+$totalAmount = $seatPrice * $totalSeats;
+if($paymentMode == cash){
+$discount = $totalAmount * 0.10;
+}
+else{
+$discount = $totalAmount * 0.05;
+}
+$netAmount = $totalAmount - $discount;
+echo "<div class = 'output'>";
+echo "<p>"<strong> Total Amount:</strong> Rs. " 
+.number_format($totalAmount, 2) . "<p>";
+echo "<p>"<strong> Discount:</strong> Rs. " 
+.number_format($discount, 2) . "<p>";
+echo "<p>"<strong> Net Amount:</strong> Rs. " 
+.number_format($netAmount, 2) . "<p>";
+    echo "</div>";    
+}
+?>
+</div>
+</body>
+<html>
+    
+
